@@ -1,0 +1,41 @@
+/** error.css **/
+:root {
+  --bgColor:               white;
+  --fgColor:               black;
+  --textShadow:            2px 2px 2px rgb(0, 0, 0);
+}
+
+.buttonContainer {
+  margin: 1rem;
+}
+
+.page {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 1rem 0 0.5rem 0;
+}
+
+.errorTitle {
+  font-family: var(--fontLight);
+  font-size: var(--fontSizeVeryLarge);
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+.errorImg {
+  height: 50vh;
+  max-height: 300px;
+}
+
+.caption {
+  color: rgb(100, 100, 100);
+  font-size: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+/* on a phone held vertically */
+@media (hover: none) and (orientation: portrait) {
+  .errorTitle {font-size: var(--fontSizeLarge);
+}

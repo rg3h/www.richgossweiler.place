@@ -1,0 +1,309 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252"></head><body><address>Rich Gossweiler, Chris Long, Shuichi Koga, Randy Pausch</address>
+<address>Computer Science Department</address>
+<address>University of Virginia</address>
+<address>Charlottesville, Virginia 22903</address>
+<address>(contact author: rich@virginia.edu)</address>
+<address>phone number: (804) 982-2211</address>
+<address>FAX: (804) 982-2214</address>
+<hr><h2>Table of Contents</h2>
+<a href="https://www.cs.cmu.edu/~stage3/publications/93/conferences/IEEEsymposiumOnResearchFrontiersInVR/diverPaper/paper.html#HDT0"><b>DIVER: A <u>Di</u>stributed <u>V</u>irtual <u>E</u>nvironment <u>R</u>esearch Platform</b></a>
+
+<ul>
+<a href="https://www.cs.cmu.edu/~stage3/publications/93/conferences/IEEEsymposiumOnResearchFrontiersInVR/diverPaper/paper.html#HDR1"><b> Introduction</b></a>
+<br>
+
+<a href="https://www.cs.cmu.edu/~stage3/publications/93/conferences/IEEEsymposiumOnResearchFrontiersInVR/diverPaper/paper.html#HDR2"><b>Transparent Multi-Process Control</b></a>
+<br>
+
+<a href="https://www.cs.cmu.edu/~stage3/publications/93/conferences/IEEEsymposiumOnResearchFrontiersInVR/diverPaper/paper.html#HDR3"><b> Extended Hierarchical Database Abstraction</b></a>
+<br>
+
+<a href="https://www.cs.cmu.edu/~stage3/publications/93/conferences/IEEEsymposiumOnResearchFrontiersInVR/diverPaper/paper.html#HDR4"><b> Conclusion</b></a>
+<br>
+
+<a href="https://www.cs.cmu.edu/~stage3/publications/93/conferences/IEEEsymposiumOnResearchFrontiersInVR/diverPaper/paper.html#HDR5"><b>References</b></a>
+</ul>
+
+
+<hr><!-- This file was created with the fm2html filter.The filter is copyright Norwegian Telecom Research and was programmed by Jon Stephenson von Tetzchner.  --><title>DIVER: A Distributed Virtual Environment Research Platform</title>
+<h1><a name="HDT0">DIVER: A <u>Di</u>stributed <u>V</u>irtual <u>E</u>nvironment <u>R</u>esearch Platform</a></h1>
+<a href="https://www.cs.cmu.edu/~stage3/publications/93/conferences/IEEEsymposiumOnResearchFrontiersInVR/diverPaper/paper.figure.id.24.gif"><img src="DIVER_%20A%20Distributed%20Virtual%20Environment%20Research%20Platform_files/paper.figure.id.24.gif"></a><p>
+<em>Abstract</em>
+This paper describes <b>DIVER</b>, a Virtual Environment (VE) development system which <i>transparently</i>
+ distributes rendering and input processes, implicitly decoupling the 
+application computations from the rendering computations. DIVER provides
+ the developer with a familiar C-library module, which runs on a remote 
+workstation. One complex system, Alice [PAUS93], has already been 
+developed on top of DIVER. DIVER's graphics-independent module spawns 
+server processes on other machines and communicates function calls from 
+the application using Remote Procedure Calls (RPCs). To the developer, 
+there appears to be one thread of control, when actually several 
+asynchronous processes are involved. This abstraction relieves the 
+developer from the responsibility of managing multi-process control, 
+asynchronous communication and multi-process information queuing. </p><p>
+By implicitly divorcing the application from the rendering processes and <i>placing the input devices on the rendering side</i>,
+ DIVER maintains an immersive environment for the user, while the 
+application may run at slower or more aperiodic rates. Because the input
+ devices (head trackers, gloves, etc.) feed directly into the rendering 
+database, the user receives immediate updates as he or she turns around,
+ even if the application is busy performing animation computations to 
+update objects in the scene. The glove data goes directly into the 
+rendering database as well, rather than passing through the application,
+ and as a consequence, responds immediately to user actions. This 
+creates a low-level response, much like dedicated hardware tracking of a
+ two-dimensional cursor.</p><p>
+DIVER also provides an extended hierarchical graphics database, letting 
+the developer worry less about maintaining objects and more about 
+manipulating them. A significant amount of VE application code involves 
+transforming objects within the virtual world. In DIVER, programmers may
+ transform objects with respect to <i>any other object's coordinate system</i>
+ (e.g. place a lamp at (0,0,1) above the table, regardless of where the 
+table is in the room). DIVER allows the programmer to place the virtual 
+camera (and any other input devices) <i>anywhere</i> in the tree. This allows the developer to:</p><p>
+
+</p><ul>
+<li>create an offset node to adjust for tracker positions on the user's head<br>
+
+</li><li>create a vehicle, allowing the program to move the user's 
+vehicle while the user is still free to turn and move within the vehicle<br>
+
+</li><li>create a Heads Up Display (HUD) which maintains a stable position in the user's view as he or she looks around<br>
+
+</li><li>interactively attach the user to a moving object (e.g. get a bird's eye view as the bird is moving)<br>
+</li></ul>
+
+
+This paper describes our software architecture, and contrasts it with 
+other systems such as the MR toolkit, the system built by the Veridical 
+User Environment Group at IBM, and SGI's IRIS Inventor\xaa .<p>
+<unknown>Published in the proceedings of the IEEE Symposium on Research Frontiers in Virtual Reality, San Jose, CA, October 25-26, 1993.</unknown><br>
+</p><h2><a name="HDR1"> Introduction</a></h2>
+DIVER is a Virtual Environment (VE) software system which provides an 
+easy-to-use interface for developers. DIVER transparently decouples the 
+application computations from the rendering and input mechanisms, 
+executing the application process on a different architecture than the 
+rendering hardware. DIVER accomplishes this by providing the developer 
+with a familiar C-library module containing functions which 
+transparently set up remote processes. These functions communicate via 
+Remote Procedure Calls (RPCs) to the server processes, thus providing a 
+substrate of functions masking out the underlying asynchronous 
+communication and multi-process control. To the programmer, there 
+appears to be one thread of control, and a set of VE functions which 
+create the environment.<p>
+<a href="https://www.cs.cmu.edu/~stage3/publications/93/conferences/IEEEsymposiumOnResearchFrontiersInVR/diverPaper/paper.figure.id.1.gif"><img src="DIVER_%20A%20Distributed%20Virtual%20Environment%20Research%20Platform_files/paper.figure.id.1.gif"></a></p><p>
+ Here is a dummy application which creates a simple Virtual Environment 
+-- the user can look around in a "room" and see their virtual glove. 
+There is no real application running.</p><p>
+<a href="https://www.cs.cmu.edu/~stage3/publications/93/conferences/IEEEsymposiumOnResearchFrontiersInVR/diverPaper/paper.figure.id.9.gif"><img src="DIVER_%20A%20Distributed%20Virtual%20Environment%20Research%20Platform_files/paper.figure.id.9.gif"></a></p><p>
+When the application programmer makes the VR_Init() call, the function 
+transparently spawns off a process called DIVER on one of the two 
+rendering workstations. Because we are using stereo, DIVER spawns a 
+second process to handle the other eye on a second rendering 
+workstation. The VR_Associate() call sends an RPC over to DIVER, 
+instructing it to start a tracker server process -- this process 
+continually reads tracker data so that DIVER may request the most 
+current information quickly. The VR_InitGloveDefault() call creates a 
+glove as an animated three-dimensional hardware cursor, <i>directly</i> 
+in the rendering database. The second VR_Associate() call attaches a 
+tracker to the glove. Since the tracker process is already started, this
+ results in an RPC that is propagated to the tracker server, telling it 
+to initialize a second tracker and send back two trackers worth of 
+information. The last call, VR_LoadSubtree() is also an RPC to DIVER, 
+instructing DIVER to read in a hierarchical world from disk.</p><p>
+Although transparent to the user, the following process configuration has been created:</p><p>
+<a href="https://www.cs.cmu.edu/~stage3/publications/93/conferences/IEEEsymposiumOnResearchFrontiersInVR/diverPaper/paper.figure.id.11.gif"><img src="DIVER_%20A%20Distributed%20Virtual%20Environment%20Research%20Platform_files/paper.figure.id.11.gif"></a></p><p>
+This application creates a hierarchical graphics object database in 
+DIVER. Programmers can access this database using returned handles (note
+ the hand variable, a DIVER handle into the tree), or by asking for 
+handles by name (e.g. VR_GetNodeByName()). With these handles, 
+programmers can change the attributes of objects, or manipulate the 
+structure of the tree itself:</p><p>
+<a href="https://www.cs.cmu.edu/~stage3/publications/93/conferences/IEEEsymposiumOnResearchFrontiersInVR/diverPaper/paper.figure.id.22.gif"><img src="DIVER_%20A%20Distributed%20Virtual%20Environment%20Research%20Platform_files/paper.figure.id.22.gif"></a></p><p>
+For example, if a bird object were flying under program control, 
+repositioning the camera and the hand nodes in the tree as children of 
+the bird would suddenly give the user a bird's eye view of the world. </p><p>
+The programmer can also transform objects in other objects coordinate systems, <i>without</i>
+ altering the tree structure. For example, the programmer can translate a
+ lamp to a location above a table but not change the connectivity of the
+ tree, simply by moving the lamp to (0,0,1) in the table's coordinate 
+system. This works regardless of where the table is in the room or in 
+the tree hierarchy.</p><p>
+DIVER is currently being used as a substrate for a Virtual Environment 
+Management System (VEMS) called Alice, which emphasizes rapid 
+prototyping. Alice links in the DIVER C-library and runs on a SUN, but 
+is actually written in C++ and an interpreted language called Python 
+[GUID93]. DIVER is also being used in conjunction with the UVa 
+Psychology Department for collaborative research, providing a 
+synthetically controlled environment for psychology experiments. Vision 
+researchers at UVa are also using DIVER for active-vision/robotics 
+research. </p><p>
+</p><h2><a name="HDR2">Transparent Multi-Process Control</a></h2>
+Using two SGI VGX graphics computers, one for each eye, and a tracker 
+process which handles the streaming input data from the Polhemus 3-Space
+ FASTRAK\xa8  hardware device[FAST], it was necessary to build a network
+ substrate of distributed processes to enable programmers to develop VE 
+applications. By placing the application on another machine, this 
+decoupled the application computations from the rendering computations. 
+While other systems also separate rendering from computation 
+[SHAW92][BRYA91][CODE91][BLAN90], DIVER is distinct because it makes the
+ decoupling transparent, rather than explicit. With the MR toolkit, for 
+example, one process reads the input devices, computes changes such as 
+viewpoint, and updates the geometry model. Although a second process can
+ be initiated, it is considered to be an external computation, and 
+communicates with the main process via a shared memory abstraction. In 
+order to divorce rendering and simulation frame rates, the programmer 
+must push all computation into the second process, which is awkward. 
+DIVER puts the input devices (essentially the interactive user) <i>on the rendering side</i>.
+ DIVER is attempting to achieve an immersive environment -- the faster 
+the human perceives the results of his or her actions, the more 
+immersive the application. Thus the tracker and glove data do not pass 
+through the application, which may be performing other computations as 
+well, but go directly into the rendering engine. If the application 
+wants to know where the trackers are, it asks the rendering database. 
+The application incurs a frame-rate reduction, rather than the user.<p>
+By providing a C-library of VE function calls, the programmer does not 
+perceive the DIVER system as a set of asynchronous processes running on 
+multiple machines, but as a single process. This model makes it very 
+easy to add more processes to the system, unbeknownst to the programmer 
+or user. It also provides a graphics-independent firewall for the 
+application. The C-library can easily be ported to new architectures.</p><p>
+Note that this is different from other systems, such as the MR toolkit 
+[GREE91], where it is the responsibility of the programmer to spawn 
+computation servers. Programmers may not understand the distributed 
+model, or want to deal with the extra programming burden. Informally, we
+ have observed graduate student users ignore the distributed capability 
+with systems like the MR toolkit. With DIVER, this has been abstracted 
+away from the programmer, and occurs implicitly as the result of RPC 
+calls. In fact, it is almost impossible to <i>not</i> benefit from the 
+separation, since the rendering frame rate happens behind the 
+programmer's back. The application is free to run at slower or more 
+aperiodic rates, while the rendering process maintains an immersive 
+environment for the user.</p><p>
+</p><h2><a name="HDR3"> Extended Hierarchical Database Abstraction</a></h2>
+DIVER maintains a hierarchical graphics database, providing the freedom 
+and power of inheritance illustrated by SPHIGS [PHIG88] [FOLE90](e.g. 
+nested coordinate systems, inherited attributes, rendering flow control 
+by not traversing certain tree branches). Inventor\xaa  [IRIS] [STRA92] 
+and DIVER exploit these capabilities by using a hierarchical graphics 
+database model. But unlike Inventor\xaa , which strives to be very 
+extensible and flexible, and is primarily designed for mouse based 
+interaction, DIVER has been specialized for immersive VE development. 
+Inventor's nodes may contain unbounded computations, and to provide 
+extensibility, use positional notation to refer to children nodes in the
+ tree. The camera, or viewpoint, must be placed to the left of the 
+objects which are going to be rendered in an Inventor tree. These 
+conditions require the programmer to be acutely aware of the order in 
+which the tree is traversed; Inventor provides a flexible, powerful 
+hierarchical rendering list at the cost of a complexity for the 
+programmer.<p>
+DIVER differs fundamentally from this model. The computations are 
+performed in the application's domain, keeping the rendering tree as 
+light as possible. Each node in the tree represents the attributes of a 
+graphics object: color, visibility, a transformation matrix and a list 
+of geometry to render, etc.. Children inherit these attributes, so for 
+example, if a node is invisible, that subtree is not traversed (allowing
+ programmers to maintain multiple worlds or multiple representations of 
+objects without incurring render-time costs). DIVER extends this model 
+in two ways: specifying transformations in any coordinate system, and 
+allowing camera placement anywhere in the tree.</p><p>
+</p><h5>Coordinate Systems</h5>
+When the rendering engine descends the tree, it pre-multiplies the 
+transformation matrices; thus children inherit their parent's coordinate
+ system, and consequently specify their positions as offsets from their 
+parents.<p>
+<a href="https://www.cs.cmu.edu/~stage3/publications/93/conferences/IEEEsymposiumOnResearchFrontiersInVR/diverPaper/paper.figure.id.23.gif"><img src="DIVER_%20A%20Distributed%20Virtual%20Environment%20Research%20Platform_files/paper.figure.id.23.gif"></a></p><p>
+Each node in the tree represents its own coordinate system, nested along the ancestor-path.</p><p>
+For Virtual Environment applications, it proves useful to be able to 
+transform objects with respect to other object's coordinate systems, 
+without changing the structure of the tree.</p><p>
+In the introduction section, we provided an example of moving a lamp on 
+top of a table, using the table's coordinate system. Another useful case
+ involves moving the camera (where the user is looking) in the direction
+ the user is <i>pointing</i> with his or her finger. By moving the 
+virtual camera forward relative by some amount in the coordinate system 
+of the user's hand, the user flies in the direction he or she is 
+pointing. DIVER transformation calls provide parameters which specify 
+what coordinate system to use, and whether to transform the object <i>by</i> some amount (relative) or <i>to</i> some absolute coordinate. For example: <br>
+VR_Translate (table, VR_ABSOLUTE, lamp, position);</p><p>
+This moves the lamp to an absolute position in the table's coordinate 
+system. DIVER accomplishes this by replacing the lamp's transformation 
+matrix with the matrix derived from ascending the tree, then descending 
+the tree into the table's coordinate system.</p><p>
+<a href="https://www.cs.cmu.edu/~stage3/publications/93/conferences/IEEEsymposiumOnResearchFrontiersInVR/diverPaper/paper.figure.id.25.gif"><img src="DIVER_%20A%20Distributed%20Virtual%20Environment%20Research%20Platform_files/paper.figure.id.25.gif"></a></p><p>
+As Robinett and Holloway state [ROBI92], if an object node is 
+repositioned to become a child of the hand tracker node (when the user 
+grabs an object), then when the hand moves, the object moves implicitly.
+ In DIVER, this directly implies that the object moves along with the 
+hand at the <i>rendering</i> frame rate, not the application computation frame rate.</p><p>
+<a href="https://www.cs.cmu.edu/~stage3/publications/93/conferences/IEEEsymposiumOnResearchFrontiersInVR/diverPaper/paper.figure.id.6.gif"><img src="DIVER_%20A%20Distributed%20Virtual%20Environment%20Research%20Platform_files/paper.figure.id.6.gif"></a></p><p>
+DIVER supports a general function, MoveSubTreePreservingPosition(), 
+which allows programmers to reposition an object in the tree, but not 
+have its position or orientation change as the result of inheriting a 
+new set of transformation matrices. This call is also useful when 
+flattening hierarchical objects, but not changing their appearance in 
+the Virtual environment. Thus an interactive user can detach a 
+sub-component and attach it to another object without realizing that the
+ object has changed inheritance chains.</p><p>
+</p><h5> Camera Positioning</h5>
+DIVER treats the viewpoint, or camera position, like any other object in
+ the tree. The programmer can create nodes and move the camera 
+underneath these nodes. For example, the hand and head are located under
+ a "vehicle" node. When the vehicle node is translated, the hand and the
+ head move with no additional cost. The data from the trackers hook 
+directly into the head and hand nodes.<p>
+This abstraction allows the programmer to create offset nodes, which 
+adjust for tracker placement on the user's head (trackers are usually 
+worn on top of the head, rather than exactly on the eyeballs). It also 
+allows the programmer to create a "vehicle" node, so that the program 
+can move the user while the user is still able to move and turn around 
+within that vehicle. The program can place the user inside a car and, 
+update the car's position while the tracker on the user's head 
+concurrently updates the camera position and orientation within the car.
+ If the vehicle is scaled to be smaller, then the camera shrinks, and 
+like <i>Alice in Wonderland</i>, the user finds his or her movements very small with respect to the world.</p><p>
+<a href="https://www.cs.cmu.edu/~stage3/publications/93/conferences/IEEEsymposiumOnResearchFrontiersInVR/diverPaper/paper.figure.id.26.gif"><img src="DIVER_%20A%20Distributed%20Virtual%20Environment%20Research%20Platform_files/paper.figure.id.26.gif"></a></p><p>
+Additionally, the camera can be attached to other objects in the scene. 
+By repositioning the camera as a child of a moving object, such as a 
+bird flying in the scene, the camera inherits the bird's position, 
+effectively becoming a bird-cam, allowing the user to ride along with 
+the bird.</p><p>
+And just as the camera can be placed underneath objects, objects can be 
+placed underneath the camera. This allow the programmer to create Head 
+Up Displays(HUDs). Objects such as dashboards, selection cross-hairs and
+ interactive sliders may be placed directly in the user's view, simply 
+by making them children of the camera.</p><p>
+</p><h2><a name="HDR4"> Conclusion</a></h2>
+DIVER is a Virtual Environment development system which makes it easier 
+to develop new applications and transform existing applications into VE 
+applications. DIVER transparently divorces the application from the 
+rendering engine, providing an easy-to-use C-library as an interface. By
+ associating the input devices with the rendering database, rather than 
+the application, the user can remain immersive even when the application
+ is computing more slowly or aperiodically. By using a hierarchical 
+structure, DIVER is able to extend the model to allow the programmer to 
+transform objects in any other objects' coordinate systems. By treating 
+the camera as an object in the database, DIVER supports useful Virtual 
+Environment transformations, such as creating an offset node to 
+compensate for physical tracker mounting, for creating a vehicle, for 
+creating Heads Up Displays and to allow the user to attach to other 
+moving objects.<p>
+</p><h2><a name="HDR5">References</a></h2>
+<dl>
+<dt></dt><dd>[BLAN90]  Blanchard, Chuck, Scott Burgess, Young Havill, Jaron Lanier, Ann Lasko, <i>Reality Built for Two: A Virtual Reality Tool</i>, ACM SIGGRAPH 1990 Smposium on Interactive 3D Graphics, March 1990.
+</dd><dt></dt><dd>[BRYA91]  Lewis, Bryan, Lawrende Koved and Daniel Ling, <i>Dialogue Structures for Virtual Worlds</i>, Proceedings of the ACM SIGCHI Human Factors in Computer Systems Conference, May, 1991, pp. 131-136.
+</dd><dt></dt><dd>[CODE91]  Codella, Chistopher, Reza Jalili, Lawrence 
+Koved, Daniel Ling, James Lipscomb, DAvid Rabenhorst, Chu Wang, Alan 
+Norton and Paula Sweeney, <i>Interactive Simulation in a Multi-Person Virtual World</i>, Proceedings of the ACM SIGCHI Human Factors in Computer Systems Conference, May, 1991, pp. 329-334.
+</dd><dt></dt><dd>[FAST]  <i>Polhemus 3-Space Fastrak\xa8  User's Guide</i>, Polhemus, A Kaiser Aerospace &amp; Electronics Company, P.O. Box 560, Colchester, Vermont.
+</dd><dt></dt><dd>[FOLE90]  Foley, J., A. van Dam, S. Feiner, J. Hughes, <i>Computer Graphics: Principles and Practice</i> (2nd ed.), Addison-Wesley Publishing Co., Reading Mass., 1990.
+</dd><dt></dt><dd>[GREE91]  Green, Mark, <i>Minimal Reality (MR): A Toolkit for Virtual Applications</i>, MR V1.0 Programmer's Manual, University of Alberta, September 1991.
+</dd><dt></dt><dd>[GUID93]  van Rossum, Guido, <i>Python Reference Manual</i>, Department CST, CWI, Kruislaan 413, 1098 SJ Amsterdam, The Netherlands.
+</dd><dt></dt><dd>[IRIS]  <i>IRIS Inventor\xaa  Programming Guide</i>, Volume I -- Using the Toolkit, 2nd Draft, Document number 007-1398-010.
+</dd><dt></dt><dd>[PAUS93]  Pausch, Randy, Matthew Conway Robert DeLine, Rich Gossweiler, Steve Miale, Jonathan Ashton and Richard Stoakley, <i>Alice and DIVER: A Software Architecture for the Rapid Prototyping of Virtual Environments</i>, submitted for publication in the IEEE Symposium on Research Frontiers in Virtual Reality, October 1993.
+</dd><dt></dt><dd>[PHIG88]  PHIGS+ Committee, Andries van Dame, chair, <i>PHIGS+ Functional Description, Revision 3.0</i>, Computer Graphics, 22(3), July 1988, pp. 125-128.
+</dd><dt></dt><dd>[ROBI92]  Robinett, Warren and Richard Holloway, <i>Implementation of Flying, Scaling, and Grabbing in Virtual Worlds</i>, SIGGRAPH 1992 Symposium on Interactive 3D Graphics, pp. 189-192.
+</dd><dt></dt><dd>[SHAW92]  Shaw, Chris, Jiandong Liang, Mark Green, Yunqi Sun, <i>The Decoupled Simulation Model for Virtual Reality Systems</i>, Proceedings of the ACM SIGCHI Human Factors in Computer Systems Conference, May 1992, pp. 321-328.
+</dd><dt></dt><dd>[STRA92]  Strauss, Paul and Rikk Carey, <i>An Object-Oriented 3D Graphics Toolkit</i>, SIGGRAPH `92 Computer Graphics Conference Proceedings, July 1992, pp. 341-347.
+</dd></dl>
+<a name="ENDFILE"><pre> </pre></a></body></html>

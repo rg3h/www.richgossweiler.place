@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rich Gossweiler - Diver and Alice</title>
+  <link rel=stylesheet href="../../../modules/reset.css"/>
+  <link rel=stylesheet href="../../../assets/fonts/openSans/openSans.css"/>
+  <link rel=stylesheet href="../../../modules/main.css"/>
+  <script type="module" src="../../../modules/main.js"></script>
+  <script src="diver.js"></script>
+</head>
+<body>
+<div class=page>
+    <!-- ********** diver header ********** -->
+    <div class=header id=diverHeader>
+      <!-- ********** diverHeaderTitle ********** -->
+      <div class=headerTitle id=diverHeaderTitle>
+        Rich Gossweiler
+      </div>
+
+      <!-- ********** diverHeaderDate ********** -->
+      <div class=headerDate id=diverHeaderDate>current date</div>
+
+      <div class=clearFloat></div>
+
+      <!-- ********** diverHeaderQuote ********** -->
+      <div class=headerQuote id=diverHeaderQuote></div>
+      <div class=clearFloat></div>
+    </div> <!-- header -->
+
+
+<h1>Diver and Alice: An Immersive, Virtual Environment, 3D Graphics System</h1>
+
+<div class=paragraphSpacer></div>
+
+<img src=hmd01WithTransparency.png align=right style="max-width:100%" />
+
+Back in the 1990's, the University of Virginia, under Randy Pausch,
+acquired two 100,000.00 SGIs to create virtual environments. We used
+magnetic polhemus trackers to know where your head and hands were and a
+very heavy head mounted display. The lenses had to sit so far out front
+that a sandbag was mounted on the back to counter-balance the gear.
+
+<div class=paragraphSpacer></div>
+
+I wrote DIVER (DIstributed Virtual Environment Rendering system) in C,
+based on early versions of openGL. Since we used two sgis, one for each
+eye, It used udp sockets to communicate updates the the scene graph and
+syncs for rendering.
+
+<div class=paragraphSpacer></div>
+
+DIVER departed from the Inventor scene graph with its own model, allowing
+any object to dynamically reparent under any other object without suddenly
+jumping in space due to the newly inherited parent matrices.  DIVER
+supported the idea of multiple cameras, of a rendering loop that was
+independent of a scene update loop, and the development of a simpler API
+with calls like object.moveTo() rather than matrix updates.
+
+<div class=paragraphSpacer></div>
+
+We then put different, interpretive programming languages on top of DIVER
+to allow rapid prototyping without needing to know C or to recompile and
+restart the system.  Python was the prefered language at the time and
+developers could work at remote stations and send the rendering commands
+over to DIVER.
+
+<div class=paragraphSpacer></div>
+
+In addition to developing new models for virtual environments and creating
+a virtual environment based perception lab, we also developed <a
+href=www.alice.org>Alice</a> to help people learn how to program in 3D.
+
+<div class=paragraphSpacer></div>
+
+Alice has come a long way since then and has undergone many re-writes and
+programming language changes, but even twenty years later, with the occulus
+rift, we are seeing folks re-invent and relearn some of the benefits and
+problems that an immersive headset creates.
+
+<div class=spacer></div>
+
+<img src=hmd02WithTransparency.png style="max-width:100%" />
+<img src=bunny03.png style="max-width:100%" />
+<img src=bunny02.jpg style="max-width:100%" />
+
+<div class=spacer></div>
+<div class=spacer></div>
+
+<h1>Videos</h1>
+<a href=https://www.youtube.com/watch?v=kgLLTFDQKZo>UVa early VR video
+(various time-critical rendering techniques and separation of simulation
+from human movement)
+</a>
+<!--
+<br>
+<iframe id="ytplayer" type="text/html" width="420" height="315"
+  src="http://www.youtube.com/embed/kgLLTFDQKZo" frameborder="0" ></iframe>
+-->
+
+<div class=paragraphSpacer></div>
+<a href=https://www.youtube.com/watch?v=MwOfpSHluuM>Alice: Worlds In
+Minature (Richard Stoakley genius) updated with Portal sounds</a>
+<!--
+<br>
+<iframe id="ytplayer" type="text/html" width="420" height="315"
+  src="http://www.youtube.com/embed/MwOfpSHluuM" frameborder="0" ></iframe>
+-->
+
+<div class=paragraphSpacer></div>
+<a href=https://www.youtube.com/watch?v=jSoAxv2_qa0>UVa early VR video 01</a>
+<!--
+<br>
+<iframe id="ytplayer" type="text/html" width="420" height="315"
+  src="http://www.youtube.com/embed/jSoAxv2_qa0" frameborder="0" ></iframe>
+-->
+
+<div class=paragraphSpacer></div>
+<a href=https://www.youtube.com/watch?v=3vDcoZ7xAuI>UVa early VR video 02</a>
+<!--
+<br>
+<iframe id="ytplayer" type="text/html" width="420" height="315"
+  src="http://www.youtube.com/embed/3vDcoZ7xAuI" frameborder="0" ></iframe>
+-->
+
+<div class=paragraphSpacer></div>
+<a href=https://www.youtube.com/watch?v=c8xCzgFyujE>UVa early VR Pool Table
+Level-of-Detail control</a>
+<!--
+<br>
+<iframe id="ytplayer" type="text/html" width="420" height="315"
+  src="http://www.youtube.com/embed/c8xCzgFyujE" frameborder="0" ></iframe>
+-->
+
+<div class=spacer></div>
+
+<h1>Papers</h1>
+
+<div class=entry>
+  <div class=entryTitleItalic>
+    <a href=http://goo.gl/nXHo0S> <!-- aliceARapidProtoSystemForVR.pdf -->
+      A Rapid Prototyping System for Building Virtual Environments</a>
+  </div>
+  <div class=entryDescription>
+    Matthew Conway, Randy Pausch, Rich Gossweiler, Tommy Burnette,
+    Conference companion on Human factors in computing systems. pp 295-296,
+    ACM, 1994.
+  </div>
+</div>
+
+<div class=entry>
+  <div class=entryTitleItalic>
+    <a href=http://goo.gl/mfDYti> <!-- application-independenttcr.pdf -->
+      A System for Application Independent Time Critical Rendering</a>
+  </div>
+  <div class=entryDescription>
+    Rich Gossweiler, ACM, 1994.
+  </div>
+</div>
+
+
+<div class=entry>
+  <div class=entryTitleItalic>
+    <a href=http://goo.gl/EtxlCx> <!-- aliceAndDiver.pdf -->
+      Alice and Diver: A software architecture for building environments.
+    </a>
+  </div>
+  <div class=entryDescription>
+    Randy Pausch, Matthew Conway, Robert DeLine, Rich Gossweiler, and Steve
+    Miale, INTERACT'93 and CHI'93 Conference Companion on Human
+    Factors in Computing Systems, pp. 13-14. ACM, 1993.
+  </div>
+</div>
+
+<div class=entry>
+  <div class=entryTitleItalic>
+    <a href=http://goo.gl/CFuVfR> <!-- lessonsLearned.pdf -->
+      Alice: Lessons Learned from Building a 3D System for Novices
+    </a>
+  </div>
+  <div class=entryDescription>
+    Matthew Conway, Steve Audia, Tommy Burnette, Dennis Cosgrove, and Kevin
+    Christiansen, Rob Deline, Jim Durbin, Rich Gossweiler, Shuichi Koga,
+    Chris Long, Beth Mallory, Steve Miale, Kristen Monkaitis, James Patten,
+    Jeff Pierce, Joe Shochet, David Staack, Brian Stearns, Richard
+    Stoakley, Chris Sturgill, John Viega, Jeff White, George Williams,
+    Proceedings of the SIGCHI conference on Human factors in computing
+    systems, pp. 486-493. ACM, 2000.
+  </div>
+</div>
+
+<div class=entry>
+  <div class=entryTitleItalic>
+    <a href=http://goo.gl/RnpJhG> <!-- multiuserVR.pdf -->
+    Introductory Tutorial for Developing Multi-User Virtual Environments
+    </a>
+  </div>
+  <div class=entryDescription>
+    Rich Gossweiler, Robert J. Laferriere, Michael L. Keller, and Randy
+    Pausch. "An introductory tutorial for developing multiuser virtual
+    environments." Presence 3, no. 4 (1994): 255-264.
+  </div>
+</div>
+
+<div class=entry>
+  <div class=entryTitleItalic>
+    <a href=http://goo.gl/35pcnK> <!-- diver.pdf -->
+      DIVER: a Distributed Virtual Environment Besearch Platform
+    </a>
+  </div>
+  <div class=entryDescription>
+    Rich Gossweiler, Chris Long, Shuichi Koga, and Randy Pausch.
+    In Virtual Reality, 1993. Proceedings., IEEE 1993 Symposium on Research
+    Frontiers in Virtual Reality, pp. 10-15. IEEE, 1993.
+  </div>
+</div>
+
+<div class=entry>
+  <div class=entryTitleItalic>
+    <a href=http://goo.gl/vCW2t7> <!-- amortizing3DGraphics.pdf -->
+      Amortizing 3D Graphics Optimization Across Multiple Frames
+    </a>
+  </div>
+  <div class=entryDescription>
+    Jim Durbin, Rich Gossweiler, and Randy Pausch. "Amortizing 3D graphics
+    optimization across multiple frames." In Proceedings of the 8th annual
+    ACM symposium on User interface and software technology,
+    pp. 13-19. ACM, 1995.
+  </div>
+</div>
+
+<div class=entry>
+  <div class=entryTitleItalic>
+    <a href=https://www.siggraph.org/s97/conference/courses/33.html>
+Principles of Visual Perception and Its Applications in Computer Graphics
+    </a>
+  </div>
+  <div class=entryDescription>
+    Victoria Interrante, Penny Rheingans, James Ferwerda, Rich Gossweiler,
+    and Toms Filsinger, SIGGRAPH 97 Course Notes 33.
+  </div>
+</div>
+
+<div class=entry>
+  <div class=entryTitleItalic>
+    <a href=http://goo.gl/UEjPx5> <!-- perceivingGeographicalSlant.pdf -->
+      Perceiving Geographical Slant,
+    </a>
+  </div>
+  <div class=entryDescription>
+    Mukul Bhalla, Rich Gossweiler, Jonathan Midgett, Psychonomic Bulletin &
+    Review, 2, 1995, 409-428.</a><br>
+  </div>
+</div>
+
+  <br><br>
+  </div> <!-- page -->
+</body>

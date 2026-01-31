@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rich Gossweiler - argos</title>
+  <link rel=stylesheet href="../../../modules/reset.css"/>
+  <link rel=stylesheet href="../../../assets/fonts/openSans/openSans.css"/>
+  <link rel=stylesheet href="../../../modules/main.css"/>
+  <script type="module" src="../../../modules/main.js"></script>
+  <script src="./argos.js"></script>
+</head>
+<body>
+<div class=page>
+    <!-- ********** argos header ********** -->
+    <div class=header id=argosHeader>
+      <!-- ********** argosHeaderTitle ********** -->
+      <div class=headerTitle id=argosHeaderTitle>Rich Gossweiler</div>
+
+      <!-- ********** argosHeaderDate ********** -->
+      <div class=headerDate id=argosHeaderDate>current date</div>
+
+      <div class=clearFloat></div>
+
+      <!-- ********** argosHeaderQuote ********** -->
+      <div class=headerQuote id=argosHeaderQuote>
+        Project Argos was named after one of the research team's dogs.
+      </div>
+
+      <div class=clearFloat></div>
+    </div> <!-- header -->
+
+
+<h1>Argos: Rapidly develop Android applications using a hardware-enabled,
+web-centric model</h1>
+Rich Gossweiler, Colin McDonough, James Lin, and Roy Want<br>
+
+<div class=spacer></div>
+
+<h1>Argos Description</h1>
+
+Argos integrates the phone's native capabilities into a web page, allowing
+you to create powerful, new mobile applications very quickly. You simply
+include argos.css, argos.js and argosEmulator.js into your HTML page to get
+access to sensors, GPS, voice, etc. Copy your page to the SD card and run
+Argos.
+
+<div class=spacer></div>
+
+<img src=./argosPhoneCamera.png style="max-width:100%"/><br>
+
+<div class=spacer></div>
+
+Argos runs locally, so it can work without internet access (say you just
+wanted to access the sensors for a game). But since Argos uses a customized
+Android web browser, you can easily get the combined power of the web and
+the phone. You can also turn existing web pages into mobile apps
+(e.g. GMail, Digg, Wikipedia) with just a few lines of code. There is even
+an argoEmulator.js wrapper so that you can work on the desktop.
+
+<div class=paragraphSpacer></div>
+
+This is a great opportunity to learn, explore, prototype, extend and change
+things on your phone. Don't like the way Android or Argos lays out the
+applications? Just change index.html.
+
+
+<h1>Argos Development Benefits</h1>
+
+<ul>
+<li>get access to sensors, voice, etc. with just a few lines of code</li>
+<li>develop your web page on the desktop and then just copy it to the
+phone</li>
+<li>explore new ideas, rapidly prototype and create powerful mobile
+applications</li>
+<li>integrate phone capabilities and web services easily</li>
+<li>leverage the familiar web programming model (with HTML5/CSS3/JS)</li>
+</ul>
+
+<div class=paragraphSpacer></div>
+<div class=paragraphSpacer></div>
+
+<a href=http://goo.gl/06vgeK>Video demo of Argos in 60 seconds</a><br>
+
+<iframe width="560" height="315" frameborder="0" allowfullscreen
+  src="https://www.youtube.com/embed/lBCGurGN7lQ"  style="max-width:100%"></iframe>
+
+<div class=paragraphSpacer></div>
+
+
+<h1>How Argos Works</h1>
+
+Argos is similar to ChromeOS in that it is a customized browser on top of
+an OS (in this case, on top of Android) that can reach down and provide
+device capabilities. The philosophy is the same, that the development and
+presentation model is the web.
+
+<div class=paragraphSpacer></div>
+
+Argos provides a full-screen custom HTML5 webkit browser on top of the
+Android OS. Argos lifts the phone's capabilities up to JavaScript (with
+some tricks to support native camera/video preview rendering OpenGL
+canvases).
+
+<h1>Argos and the SDCARD</h1>
+
+Argos uses a particular directory to root the
+pages. SDCARD/argos/index.html is the equivalent to the launch screen for
+your applications. You can change it to look and do whatever you want.
+
+<div class=paragraphSpacer></div>
+<img src=./argosFileSystem.png style="max-width:100%"/>
+<div class=paragraphSpacer></div>
+
+<h1>Argos JavaScript Libraries and the Desktop</h1>
+
+Argos comes with JavaScript libraries to provide access to the phone. By
+including argos.js you get access to Argos calls like
+Argos.getSensorData(). To support development on the desktop, you can also
+include argosEmulator.js. This library will detect whether you are running
+on a desktop or mobile phone. If you are on a desktop, it will intercept
+the calls and produce simulated data so that you can develop large portions
+of the application.
+
+<div class=paragraphSpacer></div>
+
+<img src=./argosPhone.png style="max-width:100%"/>
+
+<div class=spacer></div>
+
+<div class=entry>
+paper:
+  <div class=entryTitleItalic>
+    <a href=http://goo.gl/9VUdag> <!-- argos.pdf -->
+      Argos: Building a Web-Centric Application Platform on Top of Android
+    </a>
+  </div>
+  <div class=entryDescription>
+    Rich Gossweiler, Colin McDonough, James Lin, and Roy Want
+  </div>
+</div>
+
+<div class=paragraphSpacer></div>
+
+<br><br>
+
+  </div> <!-- page -->
+</body>

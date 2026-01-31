@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rich Gossweiler - CAPTCHA</title>
+  <link rel=stylesheet href="../../../modules/reset.css"/>
+  <link rel=stylesheet href="../../../assets/fonts/openSans/openSans.css"/>
+  <link rel=stylesheet href="../../../modules/main.css"/>
+  <script type="module" src="../../../modules/main.js"></script>
+  <script src="./captcha.js"></script>
+</head>
+<body>
+<div class=page>
+    <!-- ********** captcha header ********** -->
+    <div class=header id=captchaHeader>
+      <!-- ********** captchaHeaderTitle ********** -->
+      <div class=headerTitle id=captchaHeaderTitle>Rich Gossweiler</div>
+
+      <!-- ********** captchaHeaderDate ********** -->
+      <div class=headerDate id=captchaHeaderDate>current date</div>
+
+      <div class=clearFloat></div>
+
+      <!-- ********** captchaHeaderQuote ********** -->
+      <div class=headerQuote id=captchaHeaderQuote>
+      </div>
+
+      <div class=clearFloat></div>
+    </div> <!-- header -->
+
+
+<h1>What's Up CAPTCHA? A CAPTCHA Based on Image Orientation</h1>
+
+Rich Gossweiler, Maryam Kamvar, Shumeet Baluja<br>
+<div class=paragraphSpacer></div>
+
+We present a new CAPTCHA which is based on identifying an image's upright
+orientation. This task requires analysis of the often complex contents of
+an image, a task which humans usually perform well and machines generally
+do not. Given a large repository of images, such as those from a web search
+result, we use a suite of automated orientation detectors to prune those
+images that can be automatically set upright easily. We then apply a social
+feedback mechanism to verify that the remaining images have a
+human-recognizable upright orientation. The main advantages of our CAPTCHA
+technique over the traditional text recognition techniques are that it is
+language-independent, does not require text-entry (e.g. for a mobile
+device), and employs another domain for CAPTCHA generation beyond character
+obfuscation. This CAPTCHA lends itself to rapid implementation and has an
+almost limitless supply of images. We conducted extensive experiments to
+measure the viability of this technique.
+
+<div class=paragraphSpacer></div>
+<img src=captcha.jpg class=softBorder style="max-width:100%"/>
+
+<div class=paragraphSpacer></div>
+<img src=carGraph.jpg style="max-width:100%"/>
+<img src=presentsGraph.jpg style="max-width:100%"/>
+
+<div class=spacer></div>
+<div class=entry>
+  paper:
+  <div class=entryTitleItalic>
+    <a href=captcha.pdf>
+      What's up CAPTCHA?: a CAPTCHA based on image orientation
+    </a>
+  </div>
+  <div class=entryDescription>
+    Rich Gossweiler, Maryam Kamvar, Shumeet Baluja, proceedings of the 18th
+    international conference on World wide web, pp. 841-850, ACM, 2009.
+</div>
+
+<div class=spacer></div>
+
+<br><br>
+
+  </div> <!-- page -->
+</body>

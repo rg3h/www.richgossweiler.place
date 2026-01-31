@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rich Gossweiler - Penguin</title>
+  <link rel=stylesheet href="../../../modules/reset.css"/>
+  <link rel=stylesheet href="../../../assets/fonts/openSans/openSans.css"/>
+  <link rel=stylesheet href="../../../modules/main.css"/>
+  <script src="./penguin.js"></script>
+</head>
+<body>
+<div class=page>
+    <!-- ********** penguin header ********** -->
+    <div class=header id=penguinHeader>
+      <!-- ********** penguinHeaderTitle ********** -->
+      <div class=headerTitle id=penguinHeaderTitle>Rich Gossweiler</div>
+
+      <!-- ********** penguinHeaderDate ********** -->
+      <div class=headerDate id=penguinHeaderDate>current date</div>
+
+      <div class=clearFloat></div>
+
+      <!-- ********** penguinHeaderQuote ********** -->
+      <div class=headerQuote id=penguinHeaderQuote></div>
+      <div class=clearFloat></div>
+    </div> <!-- header -->
+
+
+<h1>Penguin: a Portfolio Model for Adjusting Graphics Level of Detail</h1>
+Rich Gossweiler, Bernardo Huberman<br>
+
+<div class=spacer></div>
+
+
+When there are multiple objects in the scene and the rendering engine
+cannot render all of them at their best quality, objects are often rendered
+at a reduced level of detail (LOD). It is not uncommon to model an object
+with different numbers of polygons. A penguin viewed from afar needs less
+polygons than when it is close to the camera.
+
+<div class=paragraphSpacer></div>
+<img src=penguin.jpg style="max-width:100%"/>
+
+<div class=paragraphSpacer></div>
+
+Two problems with using multiple levels of detail are (1) determining who
+gets reduced or improved and (2) when this change happens. Frequent changes
+to objects cause them to jitter or "pop" as they go from one level to
+another. This can be visually distracting.
+
+<div class=paragraphSpacer></div>
+
+<h2>Portfolio Model</h2>
+
+The idea with a portfolio model is to model each object as a stock. Its
+value is based on how "important" it is -- in this case, how much visual
+angle it consumes and how close to the center of the scene. Since the
+camera and objects move, this importance value fluxuates over time. We call
+this variance or risk.
+
+<div class=paragraphSpacer></div>
+
+The portfolio model compares the change in importance over time to evaluate
+its variance or risk. Using these measures, the system can calculate what
+objects are returning the most value and which ones are more
+risky. Combining these numbers produces a risk curve. Setting the system to
+low-risk means that objects won't change their level-of-detail much, but
+they may never acheive their highest resolution. By setting the risk high,
+objects try to achieve their best resolution, but risk popping a lot as
+they are forced to vary LOD more.
+
+<div class=paragraphSpacer></div>
+
+For the developer, this model reduces the problem to optimizing the risk
+curve and/or setting a single risk number regardless of the number of
+objects in the scene.
+
+<div class=paragraphSpacer></div>
+
+<div class=paragraphSpacer></div>
+patent: <a href=http://www.google.com/patents/US6400372>
+<i>Methods and apparatuses for selecting levels of detail for objects having
+multi-resolution models in graphics displays</i>, Richard Gossweiler,
+Bernardo Huberman, November 29, 1999.</a><br>
+
+<div class=spacer></div>
+<br><br>
+
+
+  </div> <!-- page -->
+</body>

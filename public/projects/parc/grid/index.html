@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rich Gossweiler - Grid</title>
+  <link rel=stylesheet href="../../../modules/reset.css"/>
+  <link rel=stylesheet href="../../../assets/fonts/openSans/openSans.css"/>
+  <link rel=stylesheet href="../../../modules/main.css"/>
+  <script src="./grid.js"></script>
+</head>
+<body>
+<div class=page>
+    <!-- ********** grid header ********** -->
+    <div class=header id=gridHeader>
+      <!-- ********** gridHeaderTitle ********** -->
+      <div class=headerTitle id=gridHeaderTitle>Rich Gossweiler</div>
+
+      <!-- ********** gridHeaderDate ********** -->
+      <div class=headerDate id=gridHeaderDate>current date</div>
+
+      <div class=clearFloat></div>
+
+      <!-- ********** gridHeaderQuote ********** -->
+      <div class=headerQuote id=gridHeaderQuote></div>
+      <div class=clearFloat></div>
+    </div> <!-- header -->
+
+
+<h1>Grid: </h1>
+
+<div class=paragraphSpacer></div>
+
+<div class=paragraphSpacer></div>
+<img src=gridIcon2.jpg style="max-width:100%"/>
+<div class=paragraphSpacer></div>
+
+Grid is an infrastructure for rapidly prototyping and developing
+interactive 3D graphics applications. Grid runs on top of OpenGL in C++ to
+achieve higher graphics throughput. Grid provides a clean application
+interface so that interpreted languages such as python can interact with
+Grid. An interpreted language allows the developer to experiment and tune
+without enduring a lengthy recompile cycle each iteration. Grid was
+developed from the ground up on the PC, based on my experience developing
+the graphics system for Alice and my work at SGI.
+
+<div class=paragraphSpacer></div>
+
+Grid also provides a modular system architecture, making it easier to
+manage, modify and extend. By providing a COM interface and plugin
+architecture, developers can plug-n-play with other software
+products. Initially Grid is targeted at 3D graphics for information
+visualization applications, but is a general infrastructure easily capable
+of extending into other realms (e.g. 2D and audio).
+
+<div class=paragraphSpacer></div>
+
+<div class=paragraphSpacer></div>
+<img src=gridLayers.jpg style="max-width:100%" />
+<div class=paragraphSpacer></div>
+
+
+<h2>A Quick Example of an Application Using Grid</h2>
+
+To get some grounding, here is an example using a snipit of code that
+creates Grid-based 3D objects. The example is not complete, but it gives
+you the basic idea. It is written in C++ since that is what I am developing
+in right now, but you can imagine what the python version would look like.
+
+<div class=paragraphSpacer></div>
+
+<pre>
+GridObject *root   = GridDB::GetRoot();
+GridCamera *camera = GridDB::GetCamera();
+Grid3DGeom *ball   = GridShape::CreateSphere();  // defaults to unit sphere
+Grid3DGeom *room   = GridVRML::Load(root, "D:\room.wrl");
+
+ball->makeChildOf(room);
+ball->setColor(GridColor::PUCE);
+ball->translateTo(1.0,0,0);     // move to X=1.0 meters
+
+// Now you can do your application, and move the ball around
+// It is interesting to note that you can make the camera a
+// child of the ball and get a "ballCam" or you can make the
+// ball a child of the camera, and it will be part of the dashboard
+// (Head Up Display)
+</pre>
+
+<div class=paragraphSpacer></div>
+<div class=paragraphSpacer></div>
+
+<h2>Grid Features</h2>
+
+<ul style="list-style-type:none">
+<li>Geometric primitives: Polygons, polylines, polypoints </li>
+<li>Text: 2.75D (screen-aligned, in-scene) and 3D text </li>
+<li>Object manipulation: 3D heirarchical model Transforms </li>
+<li>Wireframe </li>
+<li>Bounding Volumes </li>
+<li>3D Object Abstraction </li>
+<li>Primitive and Parametric Shapes </li>
+<li>Switching/LOD </li>
+<li>Lighting </li>
+<li>Materials </li>
+<li>Color </li>
+<li>Translucency </li>
+<li>MFC integration </li>
+<li>Texture </li>
+<li>Fog </li>
+<li>Multiple Cameras and Viewports </li>
+<li>Audio </li>
+<li>Event Model </li>
+<li>Picking and Gestures </li>
+<li>Paths </li>
+<li>Keyframe Animation </li>
+<li>Behaviors </li>
+<li>import/export a subset of VRML 2.0 </li>
+<li>COM interface: inter-application communication support </li>
+<li>Python integration </li>
+<li>plug-in architecture</li>
+</ul>
+
+<div class=paragraphSpacer></div>
+<div class=paragraphSpacer></div>
+
+<h2>Grid Inheritance</h2>
+
+<ul>GridNode
+  <ul>GridArray
+    <br>GridBBox
+    <br>GridBV
+    <br>GridColor
+    <br>GridMaterial
+    <br>GridMatrix
+    <br>GridPoly
+    <br>GridShape
+    <br>GridStack
+    <br>GridString
+    <br>GridTranslucency
+    <br>GridTree
+    <ul>Grid3D
+      <ul>Grid3DGeom
+        <br>Grid3DText
+      </ul>
+      GridCamera
+      <br>GridLight
+    </ul>
+    GridVertex
+    <br>GridVRMLParser
+    <br>GridVector3
+  </ul>
+  GridDB
+  <br>GridLightArray
+  <br>GridLog
+  <br>GridRenderer
+  <br>GridTokenizer
+  <br>GridWebTexture
+</ul>
+
+<div class=spacer></div>
+<img src=gridAnim.gif style="max-width:100%"/>
+
+<div class=spacer></div>
+<br><br>
+
+  </div> <!-- page -->
+</body>

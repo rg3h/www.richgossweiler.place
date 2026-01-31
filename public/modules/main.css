@@ -1,0 +1,473 @@
+/** main.css **/
+
+@keyframes fadeUpAnim { 0% { opacity: 0; } 100% { opacity: 1; } }
+
+:root {
+  --fgColor:               black;
+  --accentColor:           var(--darkBlue);
+  --pageWidth:             710px;
+
+  --imageBorderColor:      drop-shadow(1px 1px 0 rgb(100, 100, 100));
+
+  --borderRadius:          5px;
+  --border:                solid 1px var(--grey200);
+
+  --boxShadow:             3px 3px 3px rgba(100, 100, 100, 0.4);
+  --boxShadowHover:        7px 7px 5px rgba(100, 100, 100, 0.4);
+  --boxShadowHover:        5px 5px 5px rgba(100, 100, 100, 0.3);
+  --boxShadowBottom:       0px 5px 5px rgba(100, 100, 100, 0.25);
+
+  --fontRegular:           openSans;
+  --fontBold:              openSansMedium;
+  --fontLight:             openSansLight;
+  --fontSize:              13px;
+  --fontSizeVeryLarge:     2rem;
+  --fontSizeLarge:         1.5rem;
+  --fontSizeSmall:         0.8rem;
+  --fontSizeVerySmall:     0.7rem;
+
+  --grey255:               rgb(255, 255, 255);
+  --grey250:               rgb(250, 250, 250);
+  --grey240:               rgb(240, 240, 240);
+  --grey220:               rgb(220, 220, 220);
+  --grey200:               rgb(200, 200, 200);
+  --grey150:               rgb(150, 150, 150);
+  --grey100:               rgb(100, 100, 100);
+  --grey80:                rgb( 80,  80,  80);
+  --grey50:                rgb( 50,  50,  50);
+
+  --orange:                rgb(255, 110,   0);
+  --blue:                  rgb(  0,  90, 255);
+  --darkBlue:              rgb( 40, 100, 210);
+  --lightBlue:             rgb(110, 160, 255);
+  --extraLightBlue:        rgb(200, 220, 250);
+  --extraExtraLightBlue:   rgb(215, 230, 255);
+
+  --purple:                rgb(125,   0, 255);
+  --darkPurple:            rgb(100,   0, 200);
+  --lightPurple:           rgb(210, 165, 255);
+  --extraLightPurple:      rgb(245, 230, 255);
+}
+
+.boxShadowTopInset {
+  box-shadow: inset var(--boxShadowBottom);
+}
+
+.smallFont {
+  font-size: var(--fontSizeSmall);
+}
+
+html {
+  font-family: var(--fontRegular);
+  font-size: var(--fontSize);
+  height: 100%;
+  overscroll-behavior: none;  /* stop page from bouncing on mobile devices */
+  padding: 0;
+  width: 100%;
+}
+
+body {
+  accent-color: var(--accentColor);
+  align-items: center;
+  animation: fadeUpAnim 0.5s ease-in-out 0.25s forwards;
+  background-color: var(--extraExtraLightBlue);
+  color: var(--fgColor);
+  display: flex;
+  flex-direction: column;
+  font-family: var(--fontRegular);
+  font-size: var(--fontSize);
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  overflow: auto;
+  overscroll-behavior: none;  /* stop page from bouncing on mobile devices */
+  width: 100%;
+}
+
+a {
+  border-radius: 5px;
+  border: solid 1px transparent;
+  padding: 0.2rem;
+  transition-duration: 0.25s;
+  transition-property: background, border, box-shadow;
+  transition-timing-function: ease-in-out;
+}
+
+a:hover {
+  background-color: white;
+  border: solid 1px var(--grey200);
+  box-shadow: var(--boxShadowBottom);
+  text-decoration: none;
+}
+
+b {
+  font-family: var(--fontBold);
+  font-weight: 500;
+}
+
+button,
+.aButton {  /* a link that looks like a button */
+  align-items: center;
+  background-color: rgb(65, 135, 255);
+  border-radius: 5px;
+  border: solid 1px rgb(170, 200, 255);
+  color: white;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  flex-grow: 0;
+  flex-shrink: 0;
+  font-family: var(--fontBold);
+  font-size: 0.9rem;
+  justify-content: center;
+  padding: 0.25em 0.5em 0.25em 0.5em;
+  text-decoration: none;
+  transition-duration: 0.15s;
+  transition-property: background, box-shadow, color;
+  transition-timing-function: ease-in-out;
+  user-select: none;
+}
+
+button:hover,
+.aButton:hover {
+  background-color: rgb(0,85,255);
+  border: solid 1px rgb(175,180,255);
+  box-shadow: var(--boxShadowHover);
+  color: white;
+}
+
+.buttonRow {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-family: var(--fontLight);
+  font-size: 2.5rem;
+  font-weight: 400;
+  margin: 0 0 -0.75rem 0;
+}
+
+h2 {
+  align-items: center;
+  border-top: var(--border);
+  display: flex;
+  font-family: var(--fontLight);
+  font-size: 1.6rem;
+  font-weight: 400;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 0.5rem;
+}
+
+h3 {
+  font-family: var(--fontLight);
+  font-size: 1.4rem;
+  font-weight: 400;
+  margin: 1rem 0 -0.2rem 0;
+}
+
+h4 {
+  font-family: var(--fontLight);
+  font-weight: 400;
+  font-size: 1rem;
+  font-style: italic;
+  margin: 0.25rem 0 -0.2rem 0;
+}
+
+li {
+  margin: 0.25rem 0 0 -1rem;
+}
+
+.noWrap {
+  overflow: visible;
+  white-space: normal;
+}
+
+summary {
+  margin-left: -1.5rem;
+  overflow: hidden;
+  padding-left: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+
+details {
+  margin-left: 2rem;
+  padding-left: 0;
+}
+
+table {
+  border-radius: var(--borderRadius);
+  border-spacing: 0; /*table can't use border-collapse border-radius together*/
+  border: var(--border);
+}
+
+td, th {
+  border: none;
+  padding: 0.1em 0.5em 0.1em 0.5em;
+  text-align: left;
+}
+
+tr {
+  border-collapse: collapse;
+}
+
+tr:nth-child(even) {
+  background-color: rgb(240, 240, 240);
+}
+
+details {
+  margin: 0 0 0.5rem 2rem;
+}
+
+summary {
+  cursor: pointer;
+}
+
+.disabled-link {
+  color: var(--grey100);
+  cursor: default;      /* changes cursor from pointer to default */
+  pointer-events: none; /* Prevents mouse clicks */
+}
+
+.hideOnPhone {
+  display: inline-block;  /* by default, not on phone, so not hidden */
+}
+
+.box {
+  border-radius: var(--borderRadius);
+  border: var(--border);
+  padding: 1rem;
+}
+
+.roundedImage {
+  border-radius: 10px;
+}
+
+.greyComment {
+  color: var(--grey100);
+  display: inline-block;
+  font-style: italic;
+}
+
+.topBar {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex-grow: 0;
+  font-size: var(--fontSizeSmall);
+  justify-content: center;
+  transition-duration: 0.15s;
+  transition-property: box-shadow;
+  transition-timing-function: ease-in-out;
+  width: 100%;
+  z-index: 1;
+}
+
+.topBarLogo {
+  height: 2em;
+  margin-right: 1em;
+}
+
+.page {
+  background: white;
+  border-radius: 10px;
+  flex-grow: 1;
+  margin-bottom: 0.5rem;
+  max-width: var(--pageWidth);
+  min-width: var(--pageWidth);
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: 1rem;
+  scroll-behavior: smooth;
+  scroll-padding-top: 1em;
+  scrollbar-gutter: stable both-edges;
+  width: var(--pageWidth);
+}
+
+.page::-webkit-scrollbar {
+  height: 1rem;
+  width: 1rem;
+}
+
+.page::-webkit-scrollbar-track {
+  background-color: var(--grey240);
+  border-radius: 1rem;
+}
+
+.page::-webkit-scrollbar-track-piece {
+  border-radius: 1rem;
+}
+
+.page::-webkit-scrollbar-thumb {
+  background-color: var(--accentColor);
+  border-radius: 1rem;
+}
+
+.pageTopContainer {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.pageTopContainerLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.pageTopLogo {
+  width:13cqi;  /* 13% of the parent container size */
+}
+
+.pageTopEmoji {
+  font-size: var(--fontSize);
+  text-align: center;
+}
+
+.figureDescription,
+.pageTopLeftFigureDescription {
+  border-top: solid 1px var(--grey200);
+  color: var(--grey100);
+  font-size: var(--fontSizeVerySmall);
+  text-align: center;
+}
+
+.pageTopLeftFigureDescription {
+  margin-top: -0.5rem;
+}
+
+.pageTopContainerRight {
+  flex-grow: 1;
+}
+
+.pageTopFarRight {
+  float: right;
+  text-align: right;
+}
+
+.date {
+  color: var(--grey100);
+  font-size: var(--fontSizeVerySmall);
+}
+
+.pdfLink {
+  float: right;
+  font-size: 0.75rem;
+}
+
+.pageTopTitle {
+  font-family: var(--fontLight);
+  font-size: 2.5rem;
+  margin: -0.5rem 0 -0.5rem 0;
+}
+
+.pageTopEmail {
+  font-size: 0.75rem;
+}
+
+.pageTopQuote {
+  font-style: italic;
+  margin: 0.25rem 0 1rem 0;
+}
+
+.pageTopSummary {
+}
+
+.resumeEntryTitle {
+  font-family: var(--fontLight);
+  font-size: 1.1rem;
+}
+
+.publicationsDetails {
+}
+
+.publicationsSummary {
+}
+
+.publicationsBib {
+  color: var(--grey50);
+  margin: 0 0 1rem 1rem;
+}
+
+.publicationsAbstract {
+  color: var(--grey50);
+  display: none;
+  margin-top:0.5rem;
+}
+
+.patentList {
+  margin-bottom: 1rem;
+}
+
+.patentItem {
+  font-size: 0.9rem;
+}
+
+.patentDescription {
+}
+
+.bottomSpacer {
+  color: var(--grey150);
+  font-size: var(--fontSizeSmall);
+  margin: 1rem 0 0 0;
+  text-align: center;
+}
+
+/* for non-desktops, turn off ability to download the pdf */
+@media (hover: none) {
+  .pdfLink {visibility: hidden;}
+}
+
+/* on a phone held vertically */
+@media (hover: none) and (orientation: portrait) {
+  :root {--pageWidth: 100%;}
+  html, body {font-size: 0.9rem;}
+  h3 {font-family: var(--fontRegular);}
+  .hideOnPhone {display: none;}
+  .topBar {font-size: var(--fontSize);}
+
+  .pageTopLogo {width:25cqi;}
+  .pageTopTitle {font-size: 3rem; line-height: 3rem; margin: 0;}
+  .pageTopFarRight {visibility: hidden;}
+  .pageTopTitle {font-size: 3rem; line-height: 3rem; margin: 0;}
+  .figureDescription, .pageTopLeftFigureDescription {font-size: 1rem;}
+
+  .educationDetails {font-family: var(--fontRegular);  font-size: 0.9rem;}
+  .resumeEntryTitle {font-family: var(--fontRegular);  font-size: 0.9rem;}
+  .publicationsDetails {font-family: var(--fontRegular); font-size: 0.9rem;}
+  .patentItem {margin-bottom: 1rem;}
+}
+
+/* on a phone held horizontally */
+/* make room on the side for the eyebrow */
+@media (hover: none) and (orientation: landscape) and (max-width: 768px) {
+  :root {--pageWidth: 100%;}
+  html, body {font-size: 0.75rem;}
+  h3 {font-family: var(--fontRegular); margin-top: 2rem;}
+  .page {margin-bottom: 0rem;}
+  .date {font-size: 1rem;}
+  .hideOnPhone {display: none;}
+  .topBar {font-size: var(--fontSize);}
+  .figureDescription, .pageTopLeftFigureDescription {font-size: 1rem;}
+  .educationDetails {font-family: var(--fontRegular);  font-size: 0.75rem;}
+  .resumeEntryTitle {font-family: var(--fontRegular);  font-size: 0.75rem;}
+  .patentItem {
+    margin-bottom: 1rem;
+    font-family: var(--fontRegular);
+    font-size: 0.75rem;
+  }
+}
+
+/* set up for printing the web page */
+/* remove the webpage height so all of the text appears in the print out/pdf */
+@media print {
+  body {background: none; height: auto;}
+  .pageTopFarRight {display: none;}
+}

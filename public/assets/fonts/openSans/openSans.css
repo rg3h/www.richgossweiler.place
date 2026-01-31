@@ -1,0 +1,36 @@
+/** openSans.css **/
+
+@font-face {
+  font-family: 'openSansExtraBold';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./OpenSans-ExtraBold.ttf');
+}
+
+@font-face {
+  font-family: 'openSansBold';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./OpenSans-Bold.ttf');
+}
+
+@font-face {
+  font-family: 'openSansMedium';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./OpenSans-Medium.ttf');
+}
+
+@font-face {
+  font-family: 'openSans';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./OpenSans-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'openSansLight';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./OpenSans-Light.ttf');
+}
