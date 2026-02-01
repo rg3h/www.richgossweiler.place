@@ -1,4 +1,4 @@
-```
+<!--
               _
             /(_))
           _/   /
@@ -17,7 +17,7 @@
    /     |      \
   /      |       \
          |
-```
+-->
 
 <img src="./public/assets/images/richGossweilerDrawing.png" height="128" align="left" valign="top"
   alt="www.richgossweiler.place" />
