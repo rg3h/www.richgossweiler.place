@@ -19,13 +19,13 @@
          |
 ```
 
-<img src="./public/assets/images/logo/logo256.png" height="128" align="left" valign="top"
+<img src="./public/assets/images/richGossweilerDrawing.png" height="128" align="left" valign="top"
   alt="www.richgossweiler.place" />
 <br>
 <b><span>ww</span><span>w.</span>richgossweiler.place</b><br>
 <sup><sub>
-<a href="https://rg3h.github.io/www.richgossweiler.place/index.html">
-https://rg3h.github.io/www.richgossweiler.place</a>
+<a href="https://github.com/rg3h/www.richgossweiler.place">
+https://github.com/rg3h/www.richgossweiler.place</a>
 </sub></sup>
 <br><br><br><br>
 This repository contains the www.richgossweiler.place website
